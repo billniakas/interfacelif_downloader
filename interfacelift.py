@@ -8,8 +8,8 @@ import sys
 Input = subprocess.getoutput("xrandr | grep -i '*'")
 resolution=Input.split()[0]
 j=1
-print("Your screen resolution is ",resolution)
-print("^^^^^^^^^^^^^^^^^^^^^^^")
+print("Your screen resolution is",resolution)
+print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
 while True:
     def rss_feed(url):
         url += "widescreen/"+str(resolution)+"/index"+str(j)+".html"
@@ -48,11 +48,9 @@ while True:
             
             for i in wallpapers:
                
-                print(i)
+                print("\nDownloading wallpaper",i[19:])
                 wallpaper = wget.download('https://interfacelift.com'+i)
-                
-        
-            
+            print("\n")
 
     url = "https://interfacelift.com/wallpaper/downloads/date/"
 
@@ -63,7 +61,7 @@ while True:
         feeds = []
         items = re.findall(r'<b style="color: #bb2f0e;">([0-9]{2,})</b>.</p>',rss, re.I)
 
-        print ("These wallpapers extend in",items[0],"pages")
+        print ("\nThese wallpapers extend in",items[0],"pages")
 
 
     pages=input("How many pages of the "+items[0]+" do you want to download ? \nPress enter if you want to quit : ")
@@ -81,7 +79,8 @@ while True:
             
             rss_feed(url)
             process_feed(filename)
-       
 
+            
+    break
 
 os.remove("tempfile.rss")
