@@ -50,7 +50,7 @@ while True:
                
                 print("\nDownloading wallpaper",i[19:])
                 wallpaper = wget.download('https://interfacelift.com'+i)
-            print("\n")
+            
 
     url = "https://interfacelift.com/wallpaper/downloads/date/"
 
@@ -80,7 +80,7 @@ while True:
             rss_feed(url)
             process_feed(filename)
 
-            
+        print("\n")
     break
 
 os.remove("tempfile.rss")
