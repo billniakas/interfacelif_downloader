@@ -1,10 +1,12 @@
-import os.path
+import os.path,os
 import re
 import urllib.request
 import urllib.error
 import wget
 import subprocess
 import sys
+import time
+
 Input = subprocess.getoutput("xrandr | grep -i '*'")
 resolution=Input.split()[0]
 j=1
@@ -53,12 +55,16 @@ while True:
         feeds = []
         items = re.findall(r'<b style="color: #bb2f0e;">([0-9]{2,})</b>.</p>',rss, re.I)
         print ("\nThese wallpapers extend in",items[0],"pages")
+        time.sleep(5)
         
     while True:
         try:
+            os.system("clear")
             pages=input("How many pages of the "+items[0]+" do you want to download ? \nPress enter if you want to quit : ")
+            time.sleep(0.5)
             if int(pages) not in range(1,int(items[0])+1):
-                print("Number of pages not in range")
+                print("\nNumber of pages not in range")
+                time.sleep(2)
                 continue
             
             else:
@@ -73,12 +79,15 @@ while True:
                     rss_feed(url)
                     process_feed(filename)
                     
-                print("\n")
+                print("\n\nDone !!!")
+                time.sleep(0.5)
                 break
         except ValueError as e:
             if pages=="":
                 break
-            else:print("Error",e)
+            else:
+                print("\nError",e)
+                time.sleep(2)
         
     break
 
