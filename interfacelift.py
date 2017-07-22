@@ -13,6 +13,23 @@ j=1
 print("Your screen resolution is",resolution)
 
 while True:
+    down_list=[]
+    def download_wallpapers(down_list):
+        r=len(down_list)
+        print("You are about to download",r,"wallpapers")
+        for i in down_list:
+            r -=1
+            
+            print("\nDownloading wallpaper",i[19:])
+            wallpaper = wget.download('https://interfacelift.com'+i)
+            print("\n")
+            if r>0:
+                
+                print(r,"wallpapers remaining")
+                print(" "*50,end="\r")
+            else:pass
+            
+        
     def rss_feed(url):
         url += "widescreen/"+str(resolution)+"/index"+str(j)+".html"
         req = urllib.request.Request(url)
@@ -46,11 +63,12 @@ while True:
                     print(i[19:],"is already downloaded"+" "*10,end="\r")
                     time.sleep(0.5)
                 else:
+                    down_list.append(i)
                 
-                    print("\nDownloading wallpaper",i[19:])
-                    wallpaper = wget.download('https://interfacelift.com'+i)
-                    print(" "*50,end="\r")
-                    
+##                    print("\nDownloading wallpaper",i[19:])
+##                    wallpaper = wget.download('https://interfacelift.com'+i)
+##                    print(" "*50,end="\r")
+                   
             
 
     url = "https://interfacelift.com/wallpaper/downloads/date/"
@@ -62,7 +80,7 @@ while True:
         feeds = []
         items = re.findall(r'<b style="color: #bb2f0e;">([0-9]{2,})</b>.</p>',rss, re.I)
         print ("\nThese wallpapers extend in",items[0],"pages")
-        time.sleep(5)
+        time.sleep(2)
         
     while True:
         try:
@@ -101,6 +119,10 @@ while True:
                     rss_feed(url)
                     process_feed(filename)
 
+
+##                for w in down_list:
+##                    print(w)
+                download_wallpapers(down_list)
                 print("\n\nDone !!!")
                 time.sleep(0.5)
                 break
@@ -114,3 +136,4 @@ while True:
     break
 
 os.remove("tempfile.rss")
+
