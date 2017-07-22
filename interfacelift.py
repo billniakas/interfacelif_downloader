@@ -55,8 +55,8 @@ while True:
     def process_feed(filename):
             
         with open(filename, 'r', encoding = 'utf-8') as f:
-            rss = f.read().replace("\n", " ")
-            wallpapers = re.findall(r'<a href="(/wallpaper/\w{7}/\w{5,}.jpg)',rss, re.I)
+            rss = f.read()#.replace("\n", " ")
+            wallpapers = re.findall(r'<a href="(/wallpaper/\w{7,}/\w{5,}.jpg)',rss, re.I)
             
             for i in wallpapers:
                 if i[19:] in files_list:
