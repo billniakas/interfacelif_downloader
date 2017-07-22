@@ -42,8 +42,15 @@ while True:
             wallpapers = re.findall(r'<a href="(/wallpaper/\w{7}/\w{5,}.jpg)',rss, re.I)
             
             for i in wallpapers:
-                print("\nDownloading wallpaper",i[19:])
-                wallpaper = wget.download('https://interfacelift.com'+i)
+                if i[19:] in files_list:
+                    print(i[19:],"is already downloaded"+" "*10,end="\r")
+                    time.sleep(0.5)
+                else:
+                
+                    print("\nDownloading wallpaper",i[19:])
+                    wallpaper = wget.download('https://interfacelift.com'+i)
+                    print(" "*50,end="\r")
+                    
             
 
     url = "https://interfacelift.com/wallpaper/downloads/date/"
@@ -68,8 +75,23 @@ while True:
                 continue
             
             else:
+                files_list=[]
                 if os.path.exists(resolution) is True:
-                    pass
+                     if os.path.isdir(resolution):
+                        count_files = 0
+                        for r,d,f in os.walk(resolution):
+                            level = r.replace(resolution, '').count(os.sep)
+                            #print(level*'\t',r)
+                            for fi in f:
+                                if fi[0] not in '.~':
+                                    #print((level+1)*'\t',fi)
+                                    files_list.append(fi)
+                                    count_files += 1
+                        print('There are {} files already downloaded in your folder'.format(count_files))
+                        
+                        time.sleep(0.5)
+                        #print(files_list)
+                    
                 else:
                     path = os.mkdir(resolution)
                 dir = str(os.getcwd()+"/"+str(resolution))
@@ -78,7 +100,7 @@ while True:
                     
                     rss_feed(url)
                     process_feed(filename)
-                    
+
                 print("\n\nDone !!!")
                 time.sleep(0.5)
                 break
