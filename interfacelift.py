@@ -9,7 +9,7 @@ import wget
 import subprocess
 import sys
 import time
-import io
+
 
 res_dict = {
     
@@ -111,7 +111,6 @@ while True:
 
 
     def process_feed(filename):
-        #with io.open(filename) as f:    
         with open(filename, 'r', encoding = 'utf-8') as f:
             rss = f.read().replace("\n", " ")
             
@@ -146,7 +145,7 @@ while True:
         time.sleep(1)
         
     while True:
-        print("How many pages of the "+items[0]+" do you want to download ? \nPress enter if you want to quit : ")
+        print("How many pages of the "+items[0]+" do you want to download? \nPress enter if you want to quit")
         try:
             #os.system("clear")
             try:
@@ -168,7 +167,8 @@ while True:
                 print("\nNumber of pages not in range")
                 time.sleep(1)
                 continue
-            
+            if int(pages)<int(start):
+                print("Ending page is smaller than the start page, must be at least the same")
             else:
                 files_list=[]
                 if os.path.exists(resolution) is True:
