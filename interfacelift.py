@@ -93,7 +93,7 @@ while True:
         req = urllib.request.Request(url)
         try:
             with urllib.request.urlopen(req) as response:
-                html = response.read().decode()
+                html = response.read().decode('latin-1')
             
             filename = "tempfile.rss"
             with open(filename, "w", encoding="utf-8") as p:
