@@ -74,6 +74,7 @@ if platform[0] == 'Windows':
     time.sleep(0.5)
     resolution=str(screensize[0])+"x"+str(screensize[1])
 else:
+    print("You are using",platform[0],platform[2],)
     Input = subprocess.getoutput("xrandr | grep -i '*'")
     resolution=Input.split()[0]
 j=1
@@ -83,6 +84,11 @@ while True:
     down_list=[]
     def download_wallpapers(down_list):
         r=len(down_list)
+        if r == 0:
+            print(" "*200,end="\r")
+            print("No wallpapers for download")
+            os.remove("tempfile.rss")
+            quit()
         print("\nYou are about to download",r,"wallpapers")
         for i in down_list:
             r -=1
@@ -91,9 +97,10 @@ while True:
             wallpaper = wget.download('https://interfacelift.com'+i)
             print("\n")
             if r>0:
-                
+                print(" "*200,end="\r")
                 print(r,"wallpapers remaining")
-                print(" "*100,end="\r")
+                print(" "*200,end="\r")
+                
             else:pass
             
         
