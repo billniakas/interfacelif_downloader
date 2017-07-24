@@ -9,6 +9,8 @@ import wget
 import subprocess
 import sys
 import time
+import platform
+import ctypes
 
 
 res_dict = {
@@ -64,8 +66,16 @@ res_dict = {
     '3072x768': '/wallpaper/downloads/date/3_screens/3072x768/',
     }
 
-Input = subprocess.getoutput("xrandr | grep -i '*'")
-resolution=Input.split()[0]
+platform=platform.uname()
+if platform[0] == 'Windows':
+    user32 = ctypes.windll.user32
+    screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+    print("You are using",platform[0],platform[3],)
+    time.sleep(0.5)
+    resolution=str(screensize[0])+"x"+str(screensize[1])
+else:
+    Input = subprocess.getoutput("xrandr | grep -i '*'")
+    resolution=Input.split()[0]
 j=1
 print("Your screen resolution is",resolution)
 
@@ -73,7 +83,7 @@ while True:
     down_list=[]
     def download_wallpapers(down_list):
         r=len(down_list)
-        print("You are about to download",r,"wallpapers")
+        print("\nYou are about to download",r,"wallpapers")
         for i in down_list:
             r -=1
             
@@ -83,7 +93,7 @@ while True:
             if r>0:
                 
                 print(r,"wallpapers remaining")
-                print(" "*50,end="\r")
+                print(" "*100,end="\r")
             else:pass
             
         
