@@ -64,6 +64,11 @@ res_dict = {
     '3840x960': '/wallpaper/downloads/date/3_screens/3840x960/',
     '3840x720': '/wallpaper/downloads/date/3_screens/3840x720/',
     '3072x768': '/wallpaper/downloads/date/3_screens/3072x768/',
+    '1024x768': '/wallpaper/downloads/date/fullscreen_4:3/1024x768/',
+    '1600x1200': '/wallpaper/downloads/date/fullscreen_4:3/1600x1200/', 
+    '1400x1050': '/wallpaper/downloads/date/fullscreen_4:3/1400x1050/',	
+    '1280x960': '/wallpaper/downloads/date/fullscreen_4:3/1280x960/',	
+    '1280x1024': '/wallpaper/downloads/date/fullscreen_5:4/1280x1024/',	
     }
 
 platform=platform.uname()
