@@ -1,4 +1,4 @@
-# interfacelift_downloader
+# interfacelift downloader
 A simple python script for downloading wallpapers from [interfacelift.com](https://interfacelift.com/) matching your desktop resolution
 ## What it does do
 * Downloads the entire range of interfacelift wallpapers matching your desktop resolution
@@ -9,3 +9,5 @@ starting page 2 - ending page 2))
 ## What it does not do
 * It does not resume failed downloads (you have to delete the failed file yourself and run the script again)
 
+### Requirements
+* python3
