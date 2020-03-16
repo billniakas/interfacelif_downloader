@@ -11,6 +11,7 @@ import sys
 import time
 import platform
 import ctypes
+import ssl
 
 
 res_dict = {
@@ -99,6 +100,7 @@ while True:
             r -=1
             
             print("\nDownloading wallpaper",i[19:])
+            ssl._create_default_https_context = ssl._create_unverified_context
             wallpaper = wget.download('https://interfacelift.com'+i)
             print("\n")
             if r>0:
@@ -114,7 +116,7 @@ while True:
         #url += "widescreen/"+str(resolution)+"/index"+str(j)+".html"
         req = urllib.request.Request(url)
         try:
-            with urllib.request.urlopen(req) as response:
+            with urllib.request.urlopen(req, context=ssl._create_unverified_context()) as response:
                 html = response.read().decode('latin-1')
             
             filename = "tempfile.rss"
