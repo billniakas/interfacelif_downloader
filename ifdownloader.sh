@@ -1,13 +1,11 @@
 #!/bin/bash
-echo 
-echo "Interfacelift Downloader"
-echo 
+echo "***************************************************"
+echo "______________Interfacelift Downloader_____________"
+echo "***************************************************"
 echo "This is a simple python script to batch download"
 echo "all your favorite wallpapers from interfacelift.com"
-echo 
-sleep 2
+echo "***************************************************"
 python3 interfacelift.py
 rm -rf tempfile.rss __pycache__
-sleep 1
 echo 
 

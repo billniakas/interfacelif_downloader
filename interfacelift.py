@@ -12,7 +12,7 @@ import time
 import platform
 import ctypes
 import ssl
-
+import pathlib
 
 res_dict = {
     
@@ -73,14 +73,15 @@ res_dict = {
     }
 
 platform=platform.uname()
+operating_system=subprocess.getoutput('cat /etc/os-release | grep -i pretty_name | cut -d "=" -f2')
 if platform[0] == 'Windows':
     user32 = ctypes.windll.user32
     screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
-    print("You are using",platform[0],platform[3],)
+    print("You are using",platform[0])
     time.sleep(0.5)
     resolution=str(screensize[0])+"x"+str(screensize[1])
 else:
-    print("You are using",platform[0],platform[2],)
+    print("You are using",operating_system.strip('"'))
     Input = subprocess.getoutput("xrandr | grep -i '*'")
     resolution=Input.split()[0]
 j=1
@@ -107,7 +108,8 @@ while True:
                 print(" "*200,end="\r")
                 print(r,"wallpapers remaining")
                 print(" "*200,end="\r")
-                
+#                os.system("clear")
+    
             else:pass
             
         
@@ -171,7 +173,7 @@ while True:
     while True:
         print("How many pages of the "+items[0]+" do you want to download? \nPress enter if you want to quit")
         try:
-            #os.system("clear")
+            os.system("clear")
             try:
                 start=input("Starting page : ")
                 if int(start) not in range(1,int(items[0])+1):
@@ -180,13 +182,18 @@ while True:
                     continue
             except ValueError as e:
                 if start=="" :
-                    break
+                    os.remove("tempfile.rss")
+                    quit()
+                else:
+                    print(e,"Not a number, try again.")
+                    continue
+                 
                 
             
             
             #pages=input("How many pages of the "+items[0]+" do you want to download ? \nPress enter if you want to quit : ")
             pages=input("Ending page : ")
-            time.sleep(0.5)
+            #time.sleep(0.5)
             if int(pages) not in range(1,int(items[0])+1):
                 print("\nNumber of pages not in range")
                 time.sleep(1)
@@ -228,6 +235,7 @@ while True:
                 time.sleep(0.5)
                 break
         except ValueError as e:
+            os.remove("tempfile.rss")
             if pages=="" :
                 break
             else:
@@ -235,6 +243,4 @@ while True:
                 time.sleep(1)
         
     break
-
 os.remove("tempfile.rss")
-
