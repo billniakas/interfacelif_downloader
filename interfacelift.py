@@ -171,9 +171,9 @@ while True:
         time.sleep(1)
         
     while True:
+        os.system("clear")
         print("How many pages of the "+items[0]+" do you want to download? \nPress enter if you want to quit")
         try:
-            os.system("clear")
             try:
                 start=input("Starting page : ")
                 if int(start) not in range(1,int(items[0])+1):
